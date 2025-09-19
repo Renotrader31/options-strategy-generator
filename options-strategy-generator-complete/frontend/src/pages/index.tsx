@@ -117,6 +117,11 @@ export default function HomePage() {
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
             Discover AI-powered options strategies tailored to your risk profile with real-time market analysis
           </p>
+          <div className="mt-4">
+            <span className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+              ✨ Updated Design & Fixed APIs
+            </span>
+          </div>
         </motion.div>
 
         {/* Search Section */}
