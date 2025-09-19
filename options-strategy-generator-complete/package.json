@@ -28,11 +28,16 @@
   "devDependencies": {
     "concurrently": "^8.2.2"
   },
+  "dependencies": {
+    "next": "14.2.14",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/yourusername/options-strategy-generator.git"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": "22.x"
   }
 }
