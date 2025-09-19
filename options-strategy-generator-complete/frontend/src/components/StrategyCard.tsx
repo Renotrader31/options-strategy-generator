@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
-  TrendingUpIcon, 
-  TrendingDownIcon, 
+  ArrowTrendingUpIcon as TrendingUpIcon, 
+  ArrowTrendingDownIcon as TrendingDownIcon, 
   MinusIcon,
   CurrencyDollarIcon,
   ExclamationTriangleIcon 

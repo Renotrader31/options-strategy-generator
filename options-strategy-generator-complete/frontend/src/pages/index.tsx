@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  TrendingUpIcon, 
+  ArrowTrendingUpIcon as TrendingUpIcon, 
   ChartBarIcon, 
   CurrencyDollarIcon,
   ArrowPathIcon,
