@@ -1,0 +1,38 @@
+{
+  "name": "options-strategy-generator",
+  "version": "1.0.0",
+  "description": "Professional options strategy analysis and recommendation system",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:api\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:api": "cd api && uvicorn main:app --reload --port 8000",
+    "build": "cd frontend && npm run build",
+    "start": "cd frontend && npm run start",
+    "lint": "cd frontend && npm run lint",
+    "test": "cd frontend && npm run test",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "options",
+    "trading",
+    "strategy",
+    "analysis",
+    "finance",
+    "polygon-api",
+    "nextjs",
+    "fastapi"
+  ],
+  "author": "Options Strategy Generator",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/options-strategy-generator.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
