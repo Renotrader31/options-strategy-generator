@@ -2,16 +2,40 @@
   "name": "options-strategy-generator",
   "version": "1.0.0",
   "description": "Professional options strategy analysis and recommendation system",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:api\"",
-    "dev:frontend": "cd frontend && npm run dev",
-    "dev:api": "cd api && uvicorn main:app --reload --port 8000",
-    "build": "cd frontend && npm run build",
-    "start": "cd frontend && npm run start",
-    "lint": "cd frontend && npm run lint",
-    "test": "cd frontend && npm run test",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "next": "14.2.14",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tailwindcss": "3.4.13",
+    "autoprefixer": "10.4.20",
+    "postcss": "8.4.47",
+    "@headlessui/react": "2.1.9",
+    "@heroicons/react": "2.1.5",
+    "recharts": "2.12.7",
+    "axios": "1.7.7",
+    "swr": "2.2.5",
+    "react-hot-toast": "2.4.1",
+    "framer-motion": "11.11.1",
+    "date-fns": "4.1.0",
+    "clsx": "2.1.1",
+    "lucide-react": "0.447.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.7.4",
+    "@types/react": "18.3.11",
+    "@types/react-dom": "18.3.1",
+    "typescript": "5.6.3",
+    "eslint": "8.57.1",
+    "eslint-config-next": "14.0.4",
+    "concurrently": "^8.2.2"
   },
   "keywords": [
     "options",
@@ -25,14 +49,6 @@
   ],
   "author": "Options Strategy Generator",
   "license": "MIT",
-  "devDependencies": {
-    "concurrently": "^8.2.2"
-  },
-  "dependencies": {
-    "next": "14.2.14",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/yourusername/options-strategy-generator.git"
