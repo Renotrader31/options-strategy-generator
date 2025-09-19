@@ -1,44 +1,20 @@
 {
   "version": 2,
-  "name": "options-strategy-generator",
   "builds": [
     {
       "src": "frontend/package.json",
-      "use": "@vercel/next"
-    },
-    {
-      "src": "api/main.py",
-      "use": "@vercel/python"
+      "use": "@vercel/next",
+      "config": {
+        "projectSettings": {
+          "rootDirectory": "frontend"
+        }
+      }
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/main.py"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/frontend/$1"
-    }
-  ],
-  "env": {
-    "POLYGON_API_KEY": "@polygon_api_key",
-    "NODE_ENV": "production"
-  },
-  "build": {
-    "env": {
-      "POLYGON_API_KEY": "@polygon_api_key"
-    }
-  },
-  "functions": {
-    "api/main.py": {
-      "runtime": "python3.9"
-    }
-  },
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "/frontend/"
+      "dest": "frontend/$1"
     }
   ]
 }
