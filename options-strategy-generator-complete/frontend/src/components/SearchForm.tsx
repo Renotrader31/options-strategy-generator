@@ -32,11 +32,11 @@ export default function SearchForm({ onScan, loading }: SearchFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-8">
       {/* Main Search */}
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col lg:flex-row gap-6">
         <div className="flex-1">
-          <label htmlFor="ticker" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="ticker" className="block text-sm font-semibold text-slate-700 mb-3">
             Stock Ticker
           </label>
           <input
@@ -45,32 +45,32 @@ export default function SearchForm({ onScan, loading }: SearchFormProps) {
             value={ticker}
             onChange={(e) => setTicker(e.target.value)}
             placeholder="Enter ticker (e.g., AAPL, SPY, TSLA)"
-            className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+            className="input text-lg"
             disabled={loading}
             maxLength={10}
           />
         </div>
 
-        <div className="sm:w-48">
-          <label htmlFor="riskProfile" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <div className="lg:w-64">
+          <label htmlFor="riskProfile" className="block text-sm font-semibold text-slate-700 mb-3">
             Risk Profile
           </label>
           <select
             id="riskProfile"
             value={riskProfile}
             onChange={(e) => setRiskProfile(e.target.value as any)}
-            className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+            className="select text-lg"
             disabled={loading}
           >
-            <option value="conservative">Conservative</option>
-            <option value="moderate">Moderate</option>
-            <option value="moderate_aggressive">Moderate Aggressive</option>
-            <option value="aggressive">Aggressive</option>
+            <option value="conservative">🛡️ Conservative</option>
+            <option value="moderate">⚖️ Moderate</option>
+            <option value="moderate_aggressive">📊 Moderate Aggressive</option>
+            <option value="aggressive">🚀 Aggressive</option>
           </select>
         </div>
 
-        <div className="sm:w-32">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <div className="lg:w-40">
+          <label className="block text-sm font-semibold text-slate-700 mb-3">
             &nbsp;
           </label>
           <motion.button
@@ -78,14 +78,17 @@ export default function SearchForm({ onScan, loading }: SearchFormProps) {
             whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={loading || !ticker.trim()}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 flex items-center justify-center"
+            className="btn-primary w-full h-[52px] text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
             {loading ? (
-              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+              <div className="flex items-center justify-center space-x-2">
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                <span>Scanning...</span>
+              </div>
             ) : (
               <>
-                <MagnifyingGlassIcon className="w-5 h-5 mr-2" />
-                Scan
+                <MagnifyingGlassIcon className="w-6 h-6 mr-2" />
+                Analyze
               </>
             )}
           </motion.button>
@@ -93,15 +96,15 @@ export default function SearchForm({ onScan, loading }: SearchFormProps) {
       </div>
 
       {/* Advanced Options Toggle */}
-      <div className="flex items-center">
+      <div className="flex items-center justify-center">
         <button
           type="button"
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+          className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 bg-slate-50 hover:bg-slate-100 rounded-lg transition-all duration-200"
           disabled={loading}
         >
-          <Cog6ToothIcon className="w-4 h-4 mr-1" />
-          {showAdvanced ? 'Hide' : 'Show'} Advanced Options
+          <Cog6ToothIcon className="w-4 h-4" />
+          <span>{showAdvanced ? 'Hide' : 'Show'} Advanced Options</span>
         </button>
       </div>
 
@@ -112,57 +115,59 @@ export default function SearchForm({ onScan, loading }: SearchFormProps) {
           opacity: showAdvanced ? 1 : 0, 
           height: showAdvanced ? 'auto' : 0 
         }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
         className="overflow-hidden"
       >
         {showAdvanced && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-gray-200 dark:border-gray-600">
-            <div>
-              <label htmlFor="minDte" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Min DTE
-              </label>
-              <input
-                type="number"
-                id="minDte"
-                value={minDte}
-                onChange={(e) => setMinDte(Number(e.target.value))}
-                min="1"
-                max="365"
-                className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-                disabled={loading}
-              />
-            </div>
+          <div className="pt-6 border-t border-slate-200">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div>
+                <label htmlFor="minDte" className="block text-sm font-semibold text-slate-700 mb-3">
+                  Min Days to Expiration
+                </label>
+                <input
+                  type="number"
+                  id="minDte"
+                  value={minDte}
+                  onChange={(e) => setMinDte(Number(e.target.value))}
+                  min="1"
+                  max="365"
+                  className="input"
+                  disabled={loading}
+                />
+              </div>
 
-            <div>
-              <label htmlFor="maxDte" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Max DTE
-              </label>
-              <input
-                type="number"
-                id="maxDte"
-                value={maxDte}
-                onChange={(e) => setMaxDte(Number(e.target.value))}
-                min="1"
-                max="365"
-                className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-                disabled={loading}
-              />
-            </div>
+              <div>
+                <label htmlFor="maxDte" className="block text-sm font-semibold text-slate-700 mb-3">
+                  Max Days to Expiration
+                </label>
+                <input
+                  type="number"
+                  id="maxDte"
+                  value={maxDte}
+                  onChange={(e) => setMaxDte(Number(e.target.value))}
+                  min="1"
+                  max="365"
+                  className="input"
+                  disabled={loading}
+                />
+              </div>
 
-            <div>
-              <label htmlFor="maxStrategies" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Max Results
-              </label>
-              <input
-                type="number"
-                id="maxStrategies"
-                value={maxStrategies}
-                onChange={(e) => setMaxStrategies(Number(e.target.value))}
-                min="1"
-                max="20"
-                className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-                disabled={loading}
-              />
+              <div>
+                <label htmlFor="maxStrategies" className="block text-sm font-semibold text-slate-700 mb-3">
+                  Max Results
+                </label>
+                <input
+                  type="number"
+                  id="maxStrategies"
+                  value={maxStrategies}
+                  onChange={(e) => setMaxStrategies(Number(e.target.value))}
+                  min="1"
+                  max="20"
+                  className="input"
+                  disabled={loading}
+                />
+              </div>
             </div>
           </div>
         )}

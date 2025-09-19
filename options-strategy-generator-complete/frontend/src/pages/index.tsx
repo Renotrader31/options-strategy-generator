@@ -70,19 +70,30 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-slate-50 bg-grid-pattern">
       {/* Header */}
-      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <TrendingUpIcon className="h-8 w-8 text-blue-600 mr-3" />
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Options Strategy Generator
-              </h1>
+          <div className="flex items-center justify-between h-20">
+            <div className="flex items-center space-x-4">
+              <div className="p-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl">
+                <TrendingUpIcon className="h-7 w-7 text-white" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-slate-900">
+                  Options Strategy Generator
+                </h1>
+                <p className="text-sm text-slate-500 font-medium">
+                  AI-Powered Options Analysis
+                </p>
+              </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-sm text-gray-500 dark:text-gray-400">
+            <div className="flex items-center space-x-4">
+              <div className="hidden sm:flex items-center px-3 py-1.5 bg-emerald-50 rounded-full border border-emerald-200">
+                <div className="w-2 h-2 bg-emerald-500 rounded-full mr-2 animate-pulse"></div>
+                <span className="text-xs font-medium text-emerald-700">Live Data</span>
+              </div>
+              <span className="text-sm text-slate-400 font-medium">
                 Powered by Polygon API
               </span>
             </div>
@@ -91,18 +102,31 @@ export default function HomePage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Hero Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl font-bold text-slate-900 mb-4">
+            Find Your Perfect 
+            <span className="text-gradient"> Options Strategy</span>
+          </h2>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            Discover AI-powered options strategies tailored to your risk profile with real-time market analysis
+          </p>
+        </motion.div>
+
         {/* Search Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-12"
         >
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-              Find Your Perfect Options Strategy
-            </h2>
+          <div className="card-elevated p-8">
             <SearchForm onScan={handleScan} loading={loading} />
           </div>
         </motion.div>
@@ -111,24 +135,33 @@ export default function HomePage() {
         <AnimatePresence>
           {currentTicker && currentPrice && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="mb-6"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="mb-8"
             >
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+              <div className="card p-6">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <ChartBarIcon className="h-6 w-6 text-blue-600 mr-2" />
-                    <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {currentTicker}
-                    </span>
+                  <div className="flex items-center space-x-4">
+                    <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl">
+                      <ChartBarIcon className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-slate-900">{currentTicker}</h3>
+                      <p className="text-sm text-slate-500 font-medium">Current Analysis</p>
+                    </div>
                   </div>
-                  <div className="flex items-center">
-                    <CurrencyDollarIcon className="h-5 w-5 text-green-600 mr-1" />
-                    <span className="text-lg font-bold text-green-600">
-                      ${currentPrice.toFixed(2)}
-                    </span>
+                  <div className="text-right">
+                    <div className="flex items-baseline space-x-1">
+                      <span className="text-3xl font-bold text-slate-900">
+                        ${currentPrice.toFixed(2)}
+                      </span>
+                      <CurrencyDollarIcon className="h-5 w-5 text-slate-400" />
+                    </div>
+                    <div className="flex items-center justify-end mt-1">
+                      <div className="w-2 h-2 bg-emerald-400 rounded-full mr-2"></div>
+                      <span className="text-sm text-slate-500 font-medium">Real-time</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -140,15 +173,25 @@ export default function HomePage() {
         <AnimatePresence>
           {loading && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="flex items-center justify-center py-12"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="card p-12 text-center"
             >
-              <LoadingSpinner />
-              <span className="ml-3 text-lg text-gray-600 dark:text-gray-400">
-                Analyzing strategies for {currentTicker}...
-              </span>
+              <div className="flex flex-col items-center space-y-4">
+                <div className="relative">
+                  <LoadingSpinner />
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-600 rounded-full animate-ping"></div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2">
+                    Analyzing Strategies
+                  </h3>
+                  <p className="text-slate-600">
+                    Finding the best options strategies for <span className="font-semibold text-blue-600">{currentTicker}</span>...
+                  </p>
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -160,25 +203,30 @@ export default function HomePage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="space-y-4"
+              className="space-y-8"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Recommended Strategies ({strategies.length})
-                </h3>
-                <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                  <ArrowPathIcon className="h-4 w-4 mr-1" />
-                  Ranked by confidence
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-2xl font-bold text-slate-900">
+                    Recommended Strategies
+                  </h3>
+                  <p className="text-slate-600 mt-1">
+                    {strategies.length} strategies found, ranked by confidence score
+                  </p>
+                </div>
+                <div className="flex items-center space-x-2 px-4 py-2 bg-blue-50 rounded-full">
+                  <ArrowPathIcon className="h-4 w-4 text-blue-600" />
+                  <span className="text-sm font-medium text-blue-700">AI Ranked</span>
                 </div>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                 {strategies.map((strategy, index) => (
                   <motion.div
                     key={strategy.id || index}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
                   >
                     <StrategyCard 
                       strategy={strategy} 
@@ -196,57 +244,80 @@ export default function HomePage() {
         {/* Empty State */}
         {!loading && strategies.length === 0 && currentTicker && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-12"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="card p-12 text-center"
           >
-            <ExclamationTriangleIcon className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <div className="p-4 bg-amber-100 rounded-2xl w-fit mx-auto mb-6">
+              <ExclamationTriangleIcon className="h-12 w-12 text-amber-600" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-900 mb-3">
               No Strategies Found
             </h3>
-            <p className="text-gray-500 dark:text-gray-400">
-              No viable strategies found for {currentTicker}. Try a different ticker or adjust your parameters.
+            <p className="text-slate-600 mb-6 max-w-md mx-auto">
+              No viable strategies found for <span className="font-semibold text-blue-600">{currentTicker}</span>. 
+              Try a different ticker or adjust your risk parameters.
             </p>
+            <button 
+              onClick={() => {
+                setCurrentTicker('');
+                setStrategies([]);
+                setCurrentPrice(null);
+              }}
+              className="btn-secondary"
+            >
+              Search Another Ticker
+            </button>
           </motion.div>
         )}
 
         {/* Welcome State */}
         {!loading && strategies.length === 0 && !currentTicker && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="py-16"
           >
-            <TrendingUpIcon className="h-16 w-16 text-blue-600 mx-auto mb-6" />
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Welcome to Options Strategy Generator
-            </h3>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-              Discover the best options strategies tailored to your risk profile. 
-              Enter a stock ticker above to get started with real-time analysis.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                <ChartBarIcon className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Real-time Analysis</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Live market data and options chains from Polygon API
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <motion.div 
+                className="card-elevated p-8 text-center group hover:scale-105 transition-transform duration-300"
+                whileHover={{ y: -5 }}
+              >
+                <div className="p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl w-fit mx-auto mb-6 group-hover:shadow-xl transition-shadow">
+                  <ChartBarIcon className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Real-time Analysis</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Live market data and options chains powered by institutional-grade APIs
                 </p>
-              </div>
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                <TrendingUpIcon className="h-8 w-8 text-green-600 mx-auto mb-3" />
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">20+ Strategies</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Comprehensive coverage from basic to advanced strategies
+              </motion.div>
+
+              <motion.div 
+                className="card-elevated p-8 text-center group hover:scale-105 transition-transform duration-300"
+                whileHover={{ y: -5 }}
+              >
+                <div className="p-4 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl w-fit mx-auto mb-6 group-hover:shadow-xl transition-shadow">
+                  <TrendingUpIcon className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">20+ Strategies</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Comprehensive coverage from conservative spreads to advanced multi-leg strategies
                 </p>
-              </div>
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                <CurrencyDollarIcon className="h-8 w-8 text-yellow-600 mx-auto mb-3" />
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Risk Management</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Confidence scoring tailored to your risk profile
+              </motion.div>
+
+              <motion.div 
+                className="card-elevated p-8 text-center group hover:scale-105 transition-transform duration-300"
+                whileHover={{ y: -5 }}
+              >
+                <div className="p-4 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl w-fit mx-auto mb-6 group-hover:shadow-xl transition-shadow">
+                  <CurrencyDollarIcon className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Smart Risk Management</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  AI-powered confidence scoring tailored to your specific risk tolerance
                 </p>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         )}
