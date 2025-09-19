@@ -42,7 +42,8 @@ app.add_middleware(
 )
 
 # Initialize services
-polygon_client = PolygonClient(api_key="75rlu6cWGNnIqqR_x8M384YUjBgGk6kT")
+POLYGON_API_KEY = os.getenv("POLYGON_API_KEY", "75rlu6cWGNnIqqR_x8M384YUjBgGk6kT")
+polygon_client = PolygonClient(api_key=POLYGON_API_KEY)
 strategy_engine = OptionsStrategyEngine(polygon_client)
 
 # Pydantic models for request/response
